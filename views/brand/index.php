@@ -6,10 +6,10 @@
 use app\components\ModalForm;
 
 echo ModalForm::widget([
-    'formPath' => '@app/views/company/_form',
-    'title' => 'Company'
+    'formPath' => '@app/views/brand/_form',
+    'title' => 'Brand'
 ]);
 
 ?>
 
-<?= \app\components\GridViewBuilder::render($provider, 'Companies') ?>
+<?= \app\components\GridViewBuilder::render($provider, 'Brands') ?>

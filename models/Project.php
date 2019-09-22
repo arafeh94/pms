@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Tools;
 use Yii;
 
 /**
@@ -21,11 +22,10 @@ use Yii;
  * @property string $meta
  * @property int $is_deleted [int(11)]
  * @property string $name [varchar(255)]
- * @property int $company_id [int(11)]
  *
  * @property Customer $customer
- * @property Category $category
  * @property Company $company
+ * @property Category $category
  * @property Attachment $attachment
  * @property string $terms [varchar(255)]
  */
@@ -45,7 +45,7 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'category_id', 'priority', 'status', 'po_number', 'attachment_id', 'company_id'], 'integer'],
+            [['customer_id', 'category_id', 'priority', 'status', 'po_number', 'attachment_id'], 'integer'],
             [['date_begin', 'date_end'], 'safe'],
             [['order_value'], 'number'],
             [['notes', 'meta', 'name', 'terms'], 'string'],
@@ -65,7 +65,6 @@ class Project extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'customer_id' => Yii::t('app', 'Customer'),
             'category_id' => Yii::t('app', 'Category'),
-            'company_id' => Yii::t('app', 'Company'),
             'name' => Yii::t('app', 'Name'),
             'priority' => Yii::t('app', 'Priority'),
             'terms' => Yii::t('app', 'Terms'),
@@ -99,17 +98,17 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttachment()
+    public function getCompany()
     {
-        return $this->hasOne(Attachment::className(), ['id' => 'attachment_id']);
+        return $this->hasOne(Company::className(), ['id' => 'company_id'])->via('customer');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany()
+    public function getAttachment()
     {
-        return $this->hasOne(Company::className(), ['id' => 'company_id']);
+        return $this->hasOne(Attachment::className(), ['id' => 'attachment_id']);
     }
 
     /**

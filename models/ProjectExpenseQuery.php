@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use app\components\extensions\AppModelQuery;
 use yii\db\ActiveQuery;
 
@@ -9,7 +10,7 @@ use yii\db\ActiveQuery;
  *
  * @see ProjectExpense
  */
-class ProjectExpenseQuery extends  AppModelQuery
+class ProjectExpenseQuery extends AppModelQuery
 {
     /**
      * @inheritdoc
@@ -19,5 +20,6 @@ class ProjectExpenseQuery extends  AppModelQuery
     {
         return parent::all($db);
     }
+
 
 }

@@ -45,7 +45,7 @@ if (!isset($model)) $model = new ProjectExpense();
 ]); ?>
 
 <?= $form->field($model, 'employee_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Employee::find()->all(), 'id', 'name'),
+    'data' => ArrayHelper::map(\app\models\Employee::find()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true

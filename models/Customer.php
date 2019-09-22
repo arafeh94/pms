@@ -16,7 +16,9 @@ use Yii;
  * @property int $attachment_id
  *
  * @property Project[] $projects
+ * @property Company $company
  * @property int $is_deleted [int(11)]
+ * @property int $company_id [int(11)]
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -35,7 +37,7 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['meta'], 'string'],
-            [['attachment_id'], 'integer'],
+            [['attachment_id', 'company_id'], 'integer'],
             [['name', 'phone', 'email'], 'string', 'max' => 255],
             [['is_deleted'], 'safe']
         ];
@@ -52,7 +54,8 @@ class Customer extends \yii\db\ActiveRecord
             'phone' => Yii::t('app', 'Phone'),
             'email' => Yii::t('app', 'Email'),
             'meta' => Yii::t('app', 'Meta'),
-            'attachment_id' => Yii::t('app', 'Attachment ID'),
+            'attachment_id' => Yii::t('app', 'Attachment'),
+            'company_id' => Yii::t('app', 'Company'),
         ];
     }
 
@@ -62,6 +65,14 @@ class Customer extends \yii\db\ActiveRecord
     public function getProjects()
     {
         return $this->hasMany(Project::className(), ['customer_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompany()
+    {
+        return $this->hasMany(Project::className(), ['company' => 'id']);
     }
 
     /**

@@ -43,6 +43,7 @@ class ProjectExpense extends \yii\db\ActiveRecord
             [['meta', 'remark'], 'string'],
             [['order_ref', 'expense_code'], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
         ];
     }
 
@@ -72,11 +73,22 @@ class ProjectExpense extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getEmployee()
     {
-        return $this->hasOne(Employee::className(), ['id' => 'project_id']);
+        return $this->hasOne(Employee::className(), ['id' => 'employee_id']);
+    }
+
+
+    /**
+     * @inheritdoc
+     * @return ProjectExpenseQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ProjectExpenseQuery(get_called_class());
     }
 }

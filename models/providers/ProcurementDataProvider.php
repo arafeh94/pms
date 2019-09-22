@@ -52,12 +52,29 @@ class ProcurementDataProvider extends AppDataProvider
         return [
             ['attribute' => 'project.po_number'],
             ['attribute' => 'supplier.name'],
-            ['attribute' => 'branch.name'],
+            ['attribute' => 'brand.name'],
             ['attribute' => 'value'],
             ['attribute' => 'pr'],
             ['attribute' => 'po_ref'],
             ['attribute' => 'po_date', 'include' => 'date'],
+
         ];
+    }
+
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['template'] = '{payments} ' . $actions['template'];
+        $actions['buttons'] = array_merge($actions['buttons'], [
+            'payments' => function ($key, $model, $index) {
+                $url = Url::to([\Yii::$app->controller->id . '/payments', 'id' => $model->id]);
+                return Html::tag('span', '', [
+                    'class' => "glyphicon glyphicon-euro pointer",
+                    'onclick' => "modalController.show('" . $url . "')",
+                ]);
+            }
+        ]);
+        return $actions;
     }
 
     /**

@@ -52,8 +52,8 @@ class ProjectExpenseDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'project.po_number'],
-            ['attribute' => 'project.name'],
-            ['attribute' => 'employee.name'],
+            ['attribute' => 'project.name', 'label' => 'Project'],
+            ['attribute' => 'employee.name', 'label' => 'Employee'],
             ['attribute' => 'order_ref'],
             ['attribute' => 'expense_code'],
             ['attribute' => 'order_amount'],

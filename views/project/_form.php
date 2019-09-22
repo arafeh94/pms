@@ -33,7 +33,7 @@ if (!isset($model)) $model = new Project();
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Customer::find()->all(), 'id', 'name'),
+    'data' => ArrayHelper::map(\app\models\Customer::find()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true
@@ -41,21 +41,14 @@ if (!isset($model)) $model = new Project();
     'addon' => \app\components\Extensions::select2Add(['customer/index'], 'Add Customer')
 ]); ?>
 <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Category::find()->all(), 'id', 'name'),
+    'data' => ArrayHelper::map(\app\models\Category::find()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true
     ],
     'addon' => \app\components\Extensions::select2Add(['category/index'], 'Add Category')
 ]); ?>
-<?= $form->field($model, 'company_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Company::find()->active()->all(), 'id', 'name'),
-    'options' => ['placeholder' => ''],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-    'addon' => \app\components\Extensions::select2Add(['company/index'], 'Add Company')
-]); ?>
+
 <?= $form->field($model, 'name')->textInput() ?>
 <?= $form->field($model, 'priority')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'po_number')->textInput() ?>

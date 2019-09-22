@@ -12,26 +12,26 @@ namespace app\models\providers;
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
 use app\components\Tools;
+use app\models\Brand;
+use app\models\Category;
 use app\models\Course;
 use app\models\Customer;
 use app\models\Department;
+use app\models\Employee;
 use app\models\Major;
-use app\models\Procurement;
 use app\models\Project;
 use app\models\search\CourseSearchModel;
 use app\models\search\DepartmentSearchModel;
 use app\models\search\MajorSearchModel;
-use app\models\Supplier;
 use kartik\grid\BooleanColumn;
 use kartik\grid\DataColumn;
-use kartik\grid\GridView;
 use phpDocumentor\Reflection\Types\Boolean;
 use yii\bootstrap\Html;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class SupplierDataProvider extends AppDataProvider
+class BrandDataProvider extends AppDataProvider
 {
 
     /**
@@ -39,7 +39,7 @@ class SupplierDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = Supplier::find()->innerJoinWith('company');
+        $this->query = Brand::find();
     }
 
     /**
@@ -47,12 +47,7 @@ class SupplierDataProvider extends AppDataProvider
      */
     function columns()
     {
-        return [
-            ['attribute' => 'company.name', 'label' => 'Company'],
-            ['attribute' => 'name'],
-            ['attribute' => 'phone'],
-            ['attribute' => 'email'],
-        ];
+        return ['name'];
     }
 
     /**
@@ -61,6 +56,6 @@ class SupplierDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['name', 'phone', 'email', 'company.name'];
+        return ['name'];
     }
 }

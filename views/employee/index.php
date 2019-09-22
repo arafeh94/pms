@@ -4,8 +4,6 @@
 /* @var $provider \app\components\extensions\AppDataProvider */
 
 use app\components\ModalForm;
-use app\models\Major;
-use app\models\Project;
 
 echo ModalForm::widget(['formPath' => '@app/views/employee/_form', 'title' => 'New Employee',]);
 

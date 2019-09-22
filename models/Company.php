@@ -12,6 +12,7 @@ use Yii;
  * @property int $is_deleted
  *
  * @property Supplier[] $suppliers
+ * @property Customer[] $customers
  */
 class Company extends \yii\db\ActiveRecord
 {
@@ -52,6 +53,14 @@ class Company extends \yii\db\ActiveRecord
     public function getSuppliers()
     {
         return $this->hasMany(Supplier::className(), ['company_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomers()
+    {
+        return $this->hasMany(Customer::className(), ['company_id' => 'id']);
     }
 
     /**

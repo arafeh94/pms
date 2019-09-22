@@ -56,27 +56,29 @@ abstract class AppController extends \yii\web\Controller
 
     public function actionView($id)
     {
+        $class = $this->_model();
+        $model = $class::find()->active()->filter()->id($id)->one();
         if (\Yii::$app->request->isAjax) {
-            $class = $this->_model();
-            return Json::encode($class::find()->active()->filter()->id($id)->one());
+            return Json::encode($model);
         }
-        return false;
+        return $this->render('view', ['model' => $model]);
     }
 
     public function actionUpdate()
     {
-        if (\Yii::$app->request->isAjax) {
-            $id = \Yii::$app->request->post($this->model)['id'];
-            $class = $this->_model();
-            $model = $id === "" ? new $class() : $class::find()->active()->id($id)->one();
-            $saved = null;
+        $id = \Yii::$app->request->post($this->model)['id'];
+        $class = $this->_model();
+        $model = $id === "" ? new $class() : $class::find()->active()->id($id)->one();
+        $saved = null;
 
-            if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-                $saved = $model->save();
-            }
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $saved = $model->save();
+        }
+        if (\Yii::$app->request->isAjax) {
             return $this->renderAjax('_form', ['model' => $model, 'saved' => $saved]);
         }
-        return false;
+
+        return $this->render('_form', ['model' => $model, 'saved' => $saved]);
     }
 
     public function actionDelete($id)

@@ -1,12 +1,12 @@
 (window).modalController = {
     show: function (url) {
-        var self = this;
+        let self = this;
         $.ajax({
             type: "html",
             url: url,
             success: function (data) {
-                var modal = $('#modal-controller');
-                var body = $('#modal-controller-body');
+                let modal = $('#modal-controller');
+                let body = $('#modal-controller-body');
                 body.empty();
                 body.append(data);
                 modal.modal('show');

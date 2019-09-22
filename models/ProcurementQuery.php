@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use app\components\extensions\AppModelQuery;
 use yii\db\ActiveQuery;
 
@@ -9,7 +10,7 @@ use yii\db\ActiveQuery;
  *
  * @see Procurement
  */
-class ProcurementQuery extends  AppModelQuery
+class ProcurementQuery extends AppModelQuery
 {
 
 

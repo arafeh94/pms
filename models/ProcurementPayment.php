@@ -59,4 +59,14 @@ class ProcurementPayment extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Procurement::className(), ['id' => 'procurement_id']);
     }
+
+
+    /**
+     * @inheritdoc
+     * @return ProcurementPaymentQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ProcurementPaymentQuery(get_called_class());
+    }
 }

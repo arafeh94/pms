@@ -3,12 +3,14 @@
 
 /* @var $provider \app\components\extensions\AppDataProvider */
 
+use app\components\ModalController;
 use app\components\ModalForm;
-use app\models\Major;
-use app\models\Project;
 
-echo ModalForm::widget(['formPath' => '@app/views/invoice/_form', 'title' => 'Invoice']);
+echo ModalForm::widget(['formPath' => '@app/views/procurement/_form', 'title' => 'Procurement']);
+
+echo ModalController::widget(['title' => 'Payments', 'size' => 'modal-lg']);
 
 ?>
 
-<?= \app\components\GridViewBuilder::render($provider, 'Invoices') ?>
+<?= \app\components\GridViewBuilder::render($provider, 'Procurements') ?>
+

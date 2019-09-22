@@ -36,6 +36,7 @@ class ProjectDataProvider extends AppDataProvider
     {
         $this->query = Project::find()
             ->innerJoinWith('customer')
+            ->innerJoinWith('company')
             ->innerJoinWith('category');
     }
 

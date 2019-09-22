@@ -36,6 +36,14 @@ if (!isset($model)) $model = new Supplier();
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 
 <?= $form->field($model, 'name')->textInput() ?>
+<?= $form->field($model, 'company_id')->widget(Select2::classname(), [
+    'data' => ArrayHelper::map(\app\models\Company::find()->active()->all(), 'id', 'name'),
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'addon' => \app\components\Extensions::select2Add(['company/index'], 'Add Company')
+]); ?>
 <?= $form->field($model, 'phone')->textInput() ?>
 <?= $form->field($model, 'email')->textInput() ?>
 
