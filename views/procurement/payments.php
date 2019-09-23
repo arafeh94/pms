@@ -2,15 +2,23 @@
 /* @var $this yii\web\View */
 
 /* @var $provider \app\components\extensions\AppDataProvider */
+
 /* @var $procurement_id int */
 
 use yii\bootstrap\Html;
 
 ?>
 
+<style>
+    #payment-grid .summary {
+        display: none
+    }
+</style>
+
 <?= \app\components\GridViewBuilder::render($provider, 'Procurement Payments', [
     'id' => 'payment-grid',
     'panel' => [],
+    'showPageSummary' => true
 ]) ?>
 
 

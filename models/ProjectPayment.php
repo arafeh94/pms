@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Tools;
 use Yii;
 
 /**
@@ -11,9 +12,13 @@ use Yii;
  * @property int $project_id
  * @property string $method
  * @property double $amount
- * @property string $CRVRef
- * @property string $date_due
  * @property string $date_payment
+ * @property string $crv_ref
+ * @property double $inv_value
+ * @property string $inv_ref
+ * @property string $inv_date
+ * @property double $due_amount
+ * @property string $due_date
  * @property string $meta
  * @property int $is_deleted
  *
@@ -29,6 +34,15 @@ class ProjectPayment extends \yii\db\ActiveRecord
         return 'project_payment';
     }
 
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->inv_ref = 'ISD' . '-' . date('y') . '-' . $this->project->id . '-' . ProjectPayment::find()->project($this->project->id)->count();
+        }
+
+        return parent::beforeSave($insert);
+    }
+
     /**
      * @inheritdoc
      */
@@ -36,11 +50,10 @@ class ProjectPayment extends \yii\db\ActiveRecord
     {
         return [
             [['project_id', 'is_deleted'], 'integer'],
-            [['amount'], 'number'],
-            [['date_due', 'date_payment'], 'safe'],
-            [['date_due', 'date_payment'], 'date', 'format' => 'y-M-d'],
+            [['amount', 'inv_value', 'due_amount'], 'number'],
+            [['date_payment', 'inv_date', 'due_date'], 'safe'],
             [['meta'], 'string'],
-            [['method', 'CRVRef'], 'string', 'max' => 255],
+            [['method', 'crv_ref', 'inv_ref'], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
         ];
     }
@@ -55,9 +68,13 @@ class ProjectPayment extends \yii\db\ActiveRecord
             'project_id' => Yii::t('app', 'Project'),
             'method' => Yii::t('app', 'Method'),
             'amount' => Yii::t('app', 'Amount'),
-            'CRVRef' => Yii::t('app', 'Crvref'),
-            'date_due' => Yii::t('app', 'Date Due'),
             'date_payment' => Yii::t('app', 'Date Payment'),
+            'crv_ref' => Yii::t('app', 'CRV Ref'),
+            'inv_value' => Yii::t('app', 'INV Value'),
+            'inv_ref' => Yii::t('app', 'INV Ref'),
+            'inv_date' => Yii::t('app', 'INV Date'),
+            'due_amount' => Yii::t('app', 'Due Amount'),
+            'due_date' => Yii::t('app', 'Due Date'),
             'meta' => Yii::t('app', 'Meta'),
             'is_deleted' => Yii::t('app', 'Is Deleted'),
         ];
@@ -71,14 +88,11 @@ class ProjectPayment extends \yii\db\ActiveRecord
         return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
 
-
     /**
-     * @inheritdoc
-     * @return ProjectPaymentQuery the active query used by this AR class.
+     * @return ProjectPaymentQuery|\yii\db\ActiveQuery
      */
     public static function find()
     {
         return new ProjectPaymentQuery(get_called_class());
     }
-
 }

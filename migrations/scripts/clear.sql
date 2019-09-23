@@ -1,0 +1,17 @@
+set foreign_key_checks = 0;
+TRUNCATE TABLE erp.attachment;
+TRUNCATE TABLE erp.brand;
+TRUNCATE TABLE erp.category;
+TRUNCATE TABLE erp.company;
+TRUNCATE TABLE erp.customer;
+TRUNCATE TABLE erp.employee;
+TRUNCATE TABLE erp.invoice;
+TRUNCATE TABLE erp.meta;
+TRUNCATE TABLE erp.procurement;
+TRUNCATE TABLE erp.procurement_payment;
+TRUNCATE TABLE erp.project;
+TRUNCATE TABLE erp.project_expense;
+TRUNCATE TABLE erp.project_payment;
+TRUNCATE TABLE erp.supplier;
+TRUNCATE TABLE erp.user;
+set foreign_key_checks = 1;

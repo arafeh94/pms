@@ -6,17 +6,12 @@
  * Time: 3:38 PM
  */
 
-/** @var $model Invoice */
 
 
 use app\models\Category;
-use app\models\Invoice;
-use kartik\widgets\Select2;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
-use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
 
 if (!isset($model)) $model = new Category();
 ?>

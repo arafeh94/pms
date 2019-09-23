@@ -4,8 +4,8 @@ namespace app\controllers;
 
 use app\components\extensions\AppController;
 
-class InvoiceController extends AppController
+class InvoiceItemController extends AppController
 {
 
-    public $model = 'Invoice';
+    public $model = 'InvoiceItem';
 }

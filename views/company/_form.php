@@ -6,12 +6,10 @@
  * Time: 3:38 PM
  */
 
-/** @var $model Invoice */
+/** @var $model Company */
 
 
 use app\models\Company;
-use app\models\Invoice;
-use kartik\widgets\Select2;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;

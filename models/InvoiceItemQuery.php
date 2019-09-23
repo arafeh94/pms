@@ -10,11 +10,11 @@ use yii\db\ActiveQuery;
  *
  * @see Invoice
  */
-class InvoiceQuery extends AppModelQuery
+class InvoiceItemQuery extends AppModelQuery
 {
     /**
      * @inheritdoc
-     * @return Invoice[]|array
+     * @return InvoiceItem[]|array
      */
     public function all($db = null)
     {
@@ -23,7 +23,7 @@ class InvoiceQuery extends AppModelQuery
 
     /**
      * @inheritdoc
-     * @return Invoice|array|null
+     * @return InvoiceItem|array|null
      */
     public function one($db = null)
     {

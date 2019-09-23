@@ -22,4 +22,9 @@ use \yii\bootstrap\Html;
             <?= Html::a('Draw Invoice', ['release/invoice'], ['class' => 'jumbotron btn btn-info btn-block']) ?>
         </td>
     </tr>
+    <tr>
+        <td>
+            <?= Html::a('Draw SOA', ['release/soa'], ['class' => 'jumbotron btn btn-info btn-block']) ?>
+        </td>
+    </tr>
 </table>

@@ -35,6 +35,7 @@ class ProcurementPayment extends \yii\db\ActiveRecord
             [['amount'], 'number'],
             [['date'], 'safe'],
             [['procurement_id'], 'exist', 'skipOnError' => true, 'targetClass' => Procurement::className(), 'targetAttribute' => ['procurement_id' => 'id']],
+            [['procurement_id', 'amount', 'date'], 'required'],
         ];
     }
 

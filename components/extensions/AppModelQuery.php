@@ -9,6 +9,7 @@
 namespace app\components\extensions;
 
 
+use app\components\Tools;
 use yii\db\ActiveQuery;
 
 class AppModelQuery extends ActiveQuery

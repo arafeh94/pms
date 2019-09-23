@@ -55,7 +55,6 @@ class ProjectExpenseDataProvider extends AppDataProvider
             ['attribute' => 'project.name', 'label' => 'Project'],
             ['attribute' => 'employee.name', 'label' => 'Employee'],
             ['attribute' => 'order_ref'],
-            ['attribute' => 'expense_code'],
             ['attribute' => 'order_amount'],
             ['attribute' => 'date_expense', 'include' => 'date'],
         ];
@@ -67,6 +66,6 @@ class ProjectExpenseDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['project.po_number', 'project.name', 'employee.name', 'order_ref', 'expense_code', 'order_amount', 'date_expense'];
+        return ['project.po_number', 'project.name', 'employee.name', 'order_ref', 'order_amount', 'date_expense'];
     }
 }

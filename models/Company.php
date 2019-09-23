@@ -32,6 +32,7 @@ class Company extends \yii\db\ActiveRecord
         return [
             [['is_deleted'], 'integer'],
             [['name'], 'string', 'max' => 255],
+            [['name'], 'required'],
         ];
     }
 

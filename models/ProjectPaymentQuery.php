@@ -10,7 +10,7 @@ use yii\db\ActiveQuery;
  *
  * @see ProjectPayment
  */
-class ProjectPaymentQuery extends  AppModelQuery
+class ProjectPaymentQuery extends AppModelQuery
 {
 
 
@@ -24,27 +24,12 @@ class ProjectPaymentQuery extends  AppModelQuery
     }
 
     /**
-     * @return ActiveQuery
-     */
-    public function active()
-    {
-        return $this->where('[[project_payment.is_deleted]]=0');
-    }
-
-    /**
      * @param $id
      * @return ActiveQuery
      */
-    public function id($id)
+    public function project($id)
     {
-        return $this->where("project_payment.id=$id");
+        return $this->andWhere(['project_id' => $id]);
     }
 
-    /**
-     * @return ActiveQuery
-     */
-    public function filter()
-    {
-        return $this;
-    }
 }

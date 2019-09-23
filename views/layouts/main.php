@@ -22,7 +22,8 @@ ToastrAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?php $title = ucfirst(Yii::$app->controller->id) ?>
+    <title><?= Html::encode($title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -33,7 +34,7 @@ ToastrAsset::register($this);
 $navigationItems = [
     ['label' => 'Projects', 'url' => ['project/index'], 'type' => 1],
     ['label' => 'Customers', 'url' => ['customer/index'], 'type' => 1],
-    ['label' => 'Invoices', 'url' => ['invoice/index'], 'type' => 1],
+    ['label' => 'Items', 'url' => ['invoice-item/index'], 'type' => 1],
     ['label' => 'Projects Payments', 'url' => ['project-payment/index'], 'type' => 1],
     ['label' => 'Employees', 'url' => ['employee/index'], 'type' => 1],
     ['label' => 'Procurements', 'url' => ['procurement/index'], 'type' => 1],
@@ -100,7 +101,7 @@ if (!in_array($currentAction, $urls)) {
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy;ARF <?= date('Y') . ' - V' . VERSION ?></p>
+        <p class="pull-left">&copy;PMS <?= date('Y') . ' - V' . VERSION ?></p>
 
         <p class="pull-right"></p>
     </div>

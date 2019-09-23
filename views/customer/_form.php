@@ -33,9 +33,22 @@ if (!isset($model)) $model = new Customer();
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+<?= $form->field($model, 'company_id')->widget(Select2::classname(), [
+    'data' => ArrayHelper::map(\app\models\Company::find()->active()->all(), 'id', 'name'),
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'addon' => \app\components\Extensions::select2Add(['company/index'], 'Add Company')
+]); ?>
 <?= $form->field($model, 'name')->textInput() ?>
+<?= $form->field($model, 'address')->textInput() ?>
 <?= $form->field($model, 'phone')->textInput() ?>
 <?= $form->field($model, 'email')->textInput() ?>
+<?= $form->field($model, 'country')->textInput() ?>
+<?= $form->field($model, 'zip')->textInput() ?>
+<?= $form->field($model, 'state')->textInput() ?>
+<?= $form->field($model, 'city')->textInput() ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>

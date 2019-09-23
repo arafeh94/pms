@@ -34,6 +34,7 @@ class Employee extends \yii\db\ActiveRecord
             [['meta'], 'string'],
             [['attachment_id', 'is_deleted'], 'integer'],
             [['name', 'phone', 'email'], 'string', 'max' => 255],
+            [['name'], 'required'],
         ];
     }
 

@@ -12,7 +12,6 @@ use Yii;
  * @property int $employee_id
  * @property string $date_expense
  * @property string $order_ref
- * @property string $expense_code
  * @property double $order_amount
  * @property string $meta
  * @property string $remark
@@ -41,7 +40,7 @@ class ProjectExpense extends \yii\db\ActiveRecord
             [['date_expense'], 'safe'],
             [['order_amount'], 'number'],
             [['meta', 'remark'], 'string'],
-            [['order_ref', 'expense_code'], 'string', 'max' => 255],
+            [['order_ref',], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
         ];
@@ -58,7 +57,6 @@ class ProjectExpense extends \yii\db\ActiveRecord
             'employee_id' => Yii::t('app', 'Employee'),
             'date_expense' => Yii::t('app', 'Date Expense'),
             'order_ref' => Yii::t('app', 'Order Ref'),
-            'expense_code' => Yii::t('app', 'Expense Code'),
             'order_amount' => Yii::t('app', 'Order Amount'),
             'meta' => Yii::t('app', 'Meta'),
             'remark' => Yii::t('app', 'Remark'),

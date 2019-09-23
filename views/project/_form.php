@@ -40,6 +40,15 @@ if (!isset($model)) $model = new Project();
     ],
     'addon' => \app\components\Extensions::select2Add(['customer/index'], 'Add Customer')
 ]); ?>
+
+<?= $form->field($model, 'employee_id')->widget(Select2::classname(), [
+    'data' => ArrayHelper::map(\app\models\Employee::find()->active()->all(), 'id', 'name'),
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'addon' => \app\components\Extensions::select2Add(['employee/index'], 'Add Employee')
+]); ?>
 <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
     'data' => ArrayHelper::map(\app\models\Category::find()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],

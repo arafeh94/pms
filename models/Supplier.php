@@ -39,6 +39,7 @@ class Supplier extends \yii\db\ActiveRecord
             [['company_id', 'attachment_id', 'is_deleted'], 'integer'],
             [['name', 'phone', 'email'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
+            [['name',], 'required'],
         ];
     }
 

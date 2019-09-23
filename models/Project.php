@@ -25,9 +25,11 @@ use Yii;
  *
  * @property Customer $customer
  * @property Company $company
+ * @property Employee $employee
  * @property Category $category
  * @property Attachment $attachment
  * @property string $terms [varchar(255)]
+ * @property int $employee_id [int(11)]
  */
 class Project extends \yii\db\ActiveRecord
 {
@@ -45,14 +47,16 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'category_id', 'priority', 'status', 'po_number', 'attachment_id'], 'integer'],
+            [['customer_id', 'employee_id', 'category_id', 'priority', 'status', 'attachment_id'], 'integer'],
             [['date_begin', 'date_end'], 'safe'],
             [['order_value'], 'number'],
-            [['notes', 'meta', 'name', 'terms'], 'string'],
+            [['notes', 'meta', 'name', 'terms', 'po_number'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['attachment_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attachment::className(), 'targetAttribute' => ['attachment_id' => 'id']],
-            [['is_deleted'], 'safe']
+            [['is_deleted'], 'safe'],
+            [['customer_id', 'employee_id', 'category_id'], 'required'],
         ];
     }
 
@@ -65,6 +69,7 @@ class Project extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'customer_id' => Yii::t('app', 'Customer'),
             'category_id' => Yii::t('app', 'Category'),
+            'employee_id' => Yii::t('app', 'Employee'),
             'name' => Yii::t('app', 'Name'),
             'priority' => Yii::t('app', 'Priority'),
             'terms' => Yii::t('app', 'Terms'),
@@ -101,6 +106,15 @@ class Project extends \yii\db\ActiveRecord
     public function getCompany()
     {
         return $this->hasOne(Company::className(), ['id' => 'company_id'])->via('customer');
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployee()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'employee_id']);
     }
 
     /**

@@ -1,0 +1,50 @@
+project - ETC
+
+invoice
+status = > ['in progress','completed','waiting','canceled']
+inv-status = > ['blocked','invoiced','canceled','returned','ready','processing','pending']
+mafine zid invoice la project ma 3indou po-number
+
+
+INVOICE
+COST-FOB, TOTAL-FOB, CURRENCY ['usd','eur','aed','qar','gbp','omr','aud'], COST ORC,TTL COST ORC, PFT
+
+INVOICE - MUCH KEL L ITEMS LEZM YBAYNU
+
+INVOICE - ZID PERCENTAGE RECOVERY
+INVOICE _ REF => ORC REF
+
+samira = ekher invoice reference bel payment te3 nafes l project
+
+INVOICE RELEASE - TOTAL PRICE -
+
+
+
+
+Project Payment: METHOD,['PDC 30','PDC 60','PDC 45','PDC 90','Cost+5Perc','BTT Charges','30 Days Net','60 Days Net','45 Days Net','90 Days Net','Refund']
+
+DUE AMOUNT = INV Value - Payment Amount,
+INV - REF = ISD-Y-P.ID-count(payment)
+
+
+
+
+
+PROCUREMENT
+VALUE USD -> CURRENCY
+Fctr -> SE FACTOR
+Se Cost = VALUE * FCTR
+Type => ["SELLABLE";"I-PROC.";"PC."]
+"100% ADV";"100% AFTER DEL.;";"30 DAYS NET.";"45 DAYS NET.";"60 DAYS NET.";"30 LC.";"Credit Card."
+INV REF - MANUAL
+Se Status -> CLOSED, OPENED
+TOTAL PROCURMENT PAYMENT
+
+
+Project Expense
+- Expense Code -
+
+
+SOA - DATE BEGIN
+ETC -
+

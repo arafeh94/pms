@@ -51,8 +51,8 @@ class ProcurementDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'project.po_number'],
-            ['attribute' => 'supplier.name'],
-            ['attribute' => 'brand.name'],
+            ['attribute' => 'supplier.name', 'label' => 'Supplier'],
+            ['attribute' => 'brand.name', 'label' => 'Brand'],
             ['attribute' => 'value'],
             ['attribute' => 'pr'],
             ['attribute' => 'po_ref'],
@@ -83,6 +83,6 @@ class ProcurementDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['project.po_number', 'supplier.name', 'branch.name', 'value', 'pr', 'po_ref', 'po_date'];
+        return ['project.po_number', 'supplier.name', 'brand.name', 'value', 'pr', 'po_ref', 'po_date'];
     }
 }

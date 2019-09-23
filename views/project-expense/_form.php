@@ -9,7 +9,7 @@
 /** @var $model \app\models\ProjectPayment */
 
 
-use app\models\Invoice;
+use app\models\InvoiceItem;
 use app\models\ProjectExpense;
 use app\models\ProjectPayment;
 use kartik\widgets\Select2;
@@ -54,7 +54,6 @@ if (!isset($model)) $model = new ProjectExpense();
 ]); ?>
 <?= $form->field($model, 'order_ref')->textInput() ?>
 <?= $form->field($model, 'order_amount')->textInput() ?>
-<?= $form->field($model, 'expense_code')->textInput() ?>
 <?= $form->field($model, 'remark')->textInput() ?>
 <?= $form->field($model, 'date_expense')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
 

@@ -41,14 +41,29 @@ if (!isset($model)) $model = new ProjectPayment();
     ],
     'addon' => \app\components\Extensions::select2Add(['project/index'], 'Add Project')
 ]); ?>
-<?= $form->field($model, 'method')->textInput() ?>
-<?= $form->field($model, 'amount')->textInput() ?>
-<?= $form->field($model, 'CRVRef')->textInput() ?>
-<?= $form->field($model, 'date_due')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+
+
+<?= $form->field($model, 'method')->widget(Select2::className(), ['data' => ['PDC 30', 'PDC 60', 'PDC 45', 'PDC 90', 'Cost+5Perc', 'BTT Charges', '30 Days Net', '60 Days Net', '45 Days Net', '90 Days Net', 'Refund'], 'hideSearch' => true]) ?>
+<?= $form->field($model, 'amount')->textInput(['type' => 'number', 'onchange' => 'changeDue(this)']) ?>
 <?= $form->field($model, 'date_payment')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+<?= $form->field($model, 'crv_ref')->textInput() ?>
+<?= $form->field($model, 'inv_value')->textInput(['type' => 'number', 'onchange' => 'changeDue(this)']) ?>
+<?= $form->field($model, 'inv_ref')->textInput(['placeholder' => 'Evaluated After Creation', 'disabled' => 'true']) ?>
+<?= $form->field($model, 'inv_date')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+<?= $form->field($model, 'due_amount')->textInput(['type' => 'number']) ?>
+<?= $form->field($model, 'due_date')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>
 </div>
 <?php ActiveForm::end(); ?>
+
+<script>
+    function changeDue(element) {
+        let payAmount = $('#projectpayment-amount').val();
+        let invAmount = $('#projectpayment-inv_value').val();
+        $('#projectpayment-due_amount').val(invAmount - payAmount);
+    }
+</script>

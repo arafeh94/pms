@@ -9,7 +9,6 @@
 /** @var $model Procurement */
 
 
-use app\models\Invoice;
 use app\models\Procurement;
 use kartik\widgets\Select2;
 use yii\bootstrap\ActiveForm;
@@ -58,20 +57,28 @@ if (!isset($model)) $model = new Procurement();
     ],
     'addon' => \app\components\Extensions::select2Add(['brand/index'], 'Add Brand')
 ]); ?>
-<?= $form->field($model, 'value')->textInput() ?>
-<?= $form->field($model, 'value_usd')->textInput() ?>
-<?= $form->field($model, 'fctr')->textInput() ?>
-<?= $form->field($model, 'se_cost')->textInput() ?>
-<?= $form->field($model, 'pr')->textInput() ?>
-<?= $form->field($model, 'type')->textInput() ?>
+<?= $form->field($model, 'value')->textInput(['type' => 'number', 'onchange' => 'updateSe(this)']) ?>
+<?= $form->field($model, 'currency')->widget(Select2::className(), ['data' => ['usd', 'eur', 'aed', 'qar', 'gbp', 'omr', 'aud'], 'hideSearch' => true]) ?>
+<?= $form->field($model, 'se')->textInput() ?>
+<?= $form->field($model, 'se_fctr')->textInput(['type' => 'number', 'onchange' => 'updateSe(this)']) ?>
+<?= $form->field($model, 'se_status')->widget(Select2::className(), ['data' => ['CLOSED', 'OPENED'], 'hideSearch' => true]) ?>
+<?= $form->field($model, 'se_cost')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'terms')->textInput() ?>
 <?= $form->field($model, 'po_ref')->textInput() ?>
-<?= $form->field($model, 'po_date')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
-<?= $form->field($model, 'se')->textInput() ?>
-<?= $form->field($model, 'se_status')->textInput() ?>
+<?= $form->field($model, 'po_date')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+<?= $form->field($model, 'inv_ref')->textInput() ?>
+<?= $form->field($model, 'pr')->textInput() ?>
+<?= $form->field($model, 'type')->widget(Select2::className(), ['data' => ["SELLABLE", "I-PROC.", "PC."], 'hideSearch' => true]) ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>
 </div>
 <?php ActiveForm::end(); ?>
+<script>
+    function updateSe(element) {
+        let fctr = $('#procurement-se_fctr').val();
+        let value = $('#procurement-value').val();
+        $('#procurement-se_cost').val(value * fctr);
+    }
+</script>

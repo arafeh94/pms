@@ -2,23 +2,27 @@
 
 namespace app\models;
 
-use app\components\Tools;
 use Yii;
 
 /**
  * This is the model class for table "customer".
  *
  * @property int $id
+ * @property int $company_id
  * @property string $name
- * @property string $phone
  * @property string $email
  * @property string $meta
  * @property int $attachment_id
+ * @property int $is_deleted
+ * @property string $phone
+ * @property string $country
+ * @property string $zip
+ * @property string $state
+ * @property string $city
+ * @property string $address [varchar(255)]
  *
- * @property Project[] $projects
  * @property Company $company
- * @property int $is_deleted [int(11)]
- * @property int $company_id [int(11)]
+ * @property Project[] $projects
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -36,10 +40,10 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['company_id', 'attachment_id', 'is_deleted'], 'integer'],
             [['meta'], 'string'],
-            [['attachment_id', 'company_id'], 'integer'],
-            [['name', 'phone', 'email'], 'string', 'max' => 255],
-            [['is_deleted'], 'safe']
+            [['name', 'email', 'phone', 'country', 'zip', 'state', 'city', 'address'], 'string', 'max' => 255],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -50,13 +54,27 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'company_id' => Yii::t('app', 'Company'),
             'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
             'email' => Yii::t('app', 'Email'),
+            'address' => Yii::t('app', 'Address'),
             'meta' => Yii::t('app', 'Meta'),
             'attachment_id' => Yii::t('app', 'Attachment'),
-            'company_id' => Yii::t('app', 'Company'),
+            'is_deleted' => Yii::t('app', 'Is Deleted'),
+            'phone' => Yii::t('app', 'Phone'),
+            'country' => Yii::t('app', 'Country'),
+            'zip' => Yii::t('app', 'Zip'),
+            'state' => Yii::t('app', 'State'),
+            'city' => Yii::t('app', 'City'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['id' => 'company_id']);
     }
 
     /**
@@ -68,16 +86,7 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCompany()
-    {
-        return $this->hasMany(Project::className(), ['company' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return CustomerQuery the active query used by this AR class.
+     * @return CustomerQuery|\yii\db\ActiveQuery
      */
     public static function find()
     {

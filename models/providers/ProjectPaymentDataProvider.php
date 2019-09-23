@@ -38,7 +38,7 @@ class ProjectPaymentDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = ProjectPayment::find();
+        $this->query = ProjectPayment::find()->innerJoinWith('project');
     }
 
     /**
@@ -51,8 +51,9 @@ class ProjectPaymentDataProvider extends AppDataProvider
             ['attribute' => 'project.name'],
             ['attribute' => 'method'],
             ['attribute' => 'amount'],
-            ['attribute' => 'CRVRef'],
-            ['attribute' => 'date_due', 'include' => 'date'],
+            ['attribute' => 'crv_ref'],
+            ['attribute' => 'due_amount'],
+            ['attribute' => 'due_date', 'include' => 'date'],
             ['attribute' => 'date_payment', 'include' => 'date']
         ];
     }
@@ -63,6 +64,6 @@ class ProjectPaymentDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['project.po_number', 'method', 'amount', 'CRVRef', 'date_due', 'date_payment'];
+        return ['project.po_number', 'method', 'amount', 'crv_ref', 'due_date', 'due_amount', 'date_payment'];
     }
 }

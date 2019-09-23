@@ -26,7 +26,7 @@ return [
                 'font-size' => 10,
                 'font-style' => 'B',
                 'font-family' => 'arial',
-                'color' => '#333333'
+                'color' => '#333333',
             ],
             'R' => [
                 'content' => 'PDF',
@@ -54,6 +54,7 @@ return [
         ];
         return [
             'filename' => $title,
+            'content' => 'samira',
             'config' => [
                 'methods' => [
                     'SetHeader' => [
