@@ -2,9 +2,14 @@
 
 namespace app\components\extensions;
 
+use app\components\ModelView;
 use app\components\Tools;
+use app\models\Project;
 use app\models\ProjectPayment;
+use kartik\grid\EditableColumnAction;
+use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -15,6 +20,12 @@ use yii\helpers\Json;
  */
 abstract class AppController extends \yii\web\Controller
 {
+
+    protected $model = null;
+    protected $providersNamespace = 'app\models\providers\\';
+    protected $modelNamespace = 'app\models\\';
+
+
     public function behaviors()
     {
         return [
@@ -30,9 +41,17 @@ abstract class AppController extends \yii\web\Controller
         ];
     }
 
-    protected $model = null;
-    protected $providersNamespace = 'app\models\providers\\';
-    protected $modelNamespace = 'app\models\\';
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'edit' => [                                       // identifier for your editable column action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => $this->_model(),                // the model for the record being edited
+                'showModelErrors' => true,                        // show model validation errors after save
+                'errorOptions' => ['header' => '']                // error summary HTML options
+            ]
+        ]);
+    }
 
     private function _model()
     {
@@ -92,4 +111,26 @@ abstract class AppController extends \yii\web\Controller
         return false;
     }
 
+    public function actionDetail()
+    {
+        $id = \Yii::$app->request->post('expandRowKey');
+        $model = $this->getModelDetails($id);
+        try {
+            return $this->renderPartial('detail', ['model' => $model]);
+        } catch (\Exception $e) {
+            return ModelView::widget(['model' => $model]);
+        }
+    }
+
+
+    /**
+     * @param $id
+     * @return ActiveRecord
+     */
+    public function getModelDetails($id)
+    {
+        $class = $this->_model();
+        $detail = $class::find()->id($id)->one();
+        return $detail;
+    }
 }

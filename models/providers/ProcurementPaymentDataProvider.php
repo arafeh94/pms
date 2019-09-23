@@ -35,7 +35,7 @@ class ProcurementPaymentDataProvider extends AppDataProvider
     function columns()
     {
         return [
-            ['attribute' => 'date', 'include' => 'date', 'pageSummary' => 'Total'],
+            ['attribute' => 'date', 'as' => 'date', 'pageSummary' => 'Total'],
             ['attribute' => 'amount', 'pageSummary' => true],
         ];
     }

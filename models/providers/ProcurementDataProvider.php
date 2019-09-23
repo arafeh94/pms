@@ -56,7 +56,7 @@ class ProcurementDataProvider extends AppDataProvider
             ['attribute' => 'value'],
             ['attribute' => 'pr'],
             ['attribute' => 'po_ref'],
-            ['attribute' => 'po_date', 'include' => 'date'],
+            ['attribute' => 'po_date', 'as' => 'date'],
 
         ];
     }

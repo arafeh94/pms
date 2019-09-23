@@ -31,7 +31,6 @@ use yii\helpers\Url;
 
 class ProjectDataProvider extends AppDataProvider
 {
-
     public function query()
     {
         $this->query = Project::find()
@@ -44,12 +43,11 @@ class ProjectDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'po_number',],
-            ['attribute' => 'name',],
-            ['attribute' => 'customer.name', 'label' => 'Customer'],
+            ['attribute' => 'name'],
+            ['attribute' => 'customer.name', 'label' => 'Customer',],
             ['attribute' => 'category.name', 'label' => 'Category'],
             ['attribute' => 'order_value',],
-            ['attribute' => 'date_begin', 'include' => 'date'],
-            ['attribute' => 'date_end', 'include' => 'date'],
+            ['attribute' => 'date_end', 'as' => ['date']],
         ];
     }
 

@@ -28,7 +28,8 @@ class GridViewBuilder
     {
         $config = array_merge([
             'id' => 'gridview',
-            'options' => ['class' => 'grid-view'],
+            'options' => ['class' => 'grid-view', ],
+            'containerOptions' => ['style' => 'overflow-x: hidden;'],
             'dataProvider' => $provider,
             'columns' => $provider->getColumns(),
             'autoXlFormat' => true,
@@ -59,7 +60,7 @@ class GridViewBuilder
             'panel' => [
                 'type' => 'primary',
                 'heading' => $title
-            ]
+            ],
         ], $config);
 
         if (($searchModel = $provider->initSearch())) {

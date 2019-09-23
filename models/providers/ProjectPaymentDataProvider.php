@@ -53,8 +53,8 @@ class ProjectPaymentDataProvider extends AppDataProvider
             ['attribute' => 'amount'],
             ['attribute' => 'crv_ref'],
             ['attribute' => 'due_amount'],
-            ['attribute' => 'due_date', 'include' => 'date'],
-            ['attribute' => 'date_payment', 'include' => 'date']
+            ['attribute' => 'due_date', 'as' => 'date'],
+            ['attribute' => 'date_payment', 'as' => 'date']
         ];
     }
 
