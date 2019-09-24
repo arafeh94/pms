@@ -1,4 +1,4 @@
--- we don't know how to generate schema erp (class Schema) :(
+-- db name erp
 create table attachment
 (
   id int auto_increment
