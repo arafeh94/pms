@@ -33,3 +33,5 @@ tests/_support/_generated
 /rbac/assignments.php
 
 composer.phar
+
+/config/config.php
