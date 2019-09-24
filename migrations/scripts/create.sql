@@ -3,9 +3,7 @@ create table attachment
 (
   id int auto_increment
     primary key,
-  url varchar(255) null,
-  description varchar(255) null,
-  hash varchar(255) null,
+  path varchar(255) null,
   is_deleted int default '0' null
 )
   engine=InnoDB
@@ -46,12 +44,17 @@ create table customer
   id int auto_increment
     primary key,
   company_id int null,
-  phone varchar(255) null,
-  email varchar(255) null,
-  meta text null,
-  attachment_id int null,
-  is_deleted int default '0' null,
   name varchar(255) null,
+  email varchar(255) null,
+  address varchar(255) null,
+  attachment_id int null,
+  city varchar(255) null,
+  phone varchar(255) null,
+  zip varchar(255) null,
+  country varchar(255) null,
+  state varchar(255) null,
+  meta text null,
+  is_deleted int default '0' null,
   constraint customer_company_id_fk
   foreign key (company_id) references company (id)
 )
@@ -93,51 +96,55 @@ create table project
     primary key,
   customer_id int null,
   category_id int null,
-  status smallint(6) null,
-  date_begin datetime null,
-  date_end datetime null,
-  order_value double null,
+  employee_id int null,
+  name varchar(255) null,
+  date_end date null,
+  date_begin date null,
   po_number varchar(255) null,
-  notes text null,
+  terms varchar(255) null,
   attachment_id int null,
   meta text null,
-  is_deleted int default '0' null,
+  status smallint(6) null,
   priority smallint(6) null,
-  name varchar(255) null,
-  terms varchar(255) null,
-  employee_id int null,
+  order_value double null,
+  notes text null,
+  etc date null,
+  is_deleted int default '0' null,
   constraint project_ibfk_1
   foreign key (customer_id) references customer (id),
   constraint project_ibfk_2
   foreign key (category_id) references category (id),
-  constraint project_ibfk_3
-  foreign key (attachment_id) references attachment (id),
   constraint project_employee_id_fk
-  foreign key (employee_id) references employee (id)
+  foreign key (employee_id) references employee (id),
+  constraint project_ibfk_3
+  foreign key (attachment_id) references attachment (id)
 )
   engine=InnoDB
 ;
 
-create table invoice
+create table invoice_item
 (
   id int auto_increment
     primary key,
   project_id int null,
+  brand_id int null,
   code varchar(255) null,
   old_code varchar(255) null,
-  ref varchar(255) null,
   description varchar(255) null,
   quantity double null,
   price double null,
-  itl_price double null,
-  inv_ref varchar(255) null,
+  price_ttl double null,
+  orc_ref varchar(255) null,
   se_ref varchar(255) null,
   order_status varchar(255) null,
-  fob_cost varchar(255) null,
-  fob_itl varchar(255) null,
-  price_usd double null,
+  fob_cost double null,
+  fob_ttl double null,
+  currency varchar(255) null,
   is_deleted int default '0' null,
-  brand_id int null,
+  orc_cost double null,
+  orc_ttl double null,
+  pft int null,
+  sup_ref varchar(255) null,
   constraint invoice_project_id_fk
   foreign key (project_id) references project (id),
   constraint invoice_brand_id_fk
@@ -147,11 +154,11 @@ create table invoice
 ;
 
 create index invoice_brand_id_fk
-  on invoice (brand_id)
+  on invoice_item (brand_id)
 ;
 
 create index invoice_project_id_fk
-  on invoice (project_id)
+  on invoice_item (project_id)
 ;
 
 create index attachment_id
@@ -176,9 +183,8 @@ create table project_expense
     primary key,
   project_id int null,
   employee_id int null,
-  date_expense datetime null,
+  date_expense date null,
   order_ref varchar(255) null,
-  expense_code varchar(255) null,
   order_amount double null,
   meta text null,
   remark text null,
@@ -206,12 +212,15 @@ create table project_payment
   project_id int null,
   method varchar(255) null,
   amount double null,
-  CRVRef varchar(255) null,
-  due_date datetime null,
+  date_payment date null,
+  crv_ref varchar(255) null,
+  inv_value double null,
+  inv_ref varchar(255) null,
+  inv_date date null,
   due_amount double null,
+  due_date date null,
   meta text null,
   is_deleted int default '0' null,
-  date_payment datetime null,
   constraint project_payment_project_id_fk
   foreign key (project_id) references project (id)
 )
@@ -247,16 +256,17 @@ create table procurement
   supplier_id int null,
   brand_id int null,
   value double null,
-  value_usd double null,
-  fctr varchar(255) null,
-  se_cost varchar(255) null,
-  pr varchar(255) null,
-  type varchar(255) null,
+  currency varchar(255) null,
+  se varchar(255) null,
+  se_fctr double null,
+  se_status varchar(255) null,
+  se_cost double null,
   terms varchar(255) null,
   po_ref varchar(255) null,
-  po_date datetime null,
-  se varchar(255) null,
-  se_status varchar(255) null,
+  po_date date null,
+  inv_ref varchar(255) null,
+  pr varchar(255) null,
+  type varchar(255) null,
   is_deleted int default '0' null,
   constraint procurement_project_id_fk
   foreign key (project_id) references project (id),
@@ -313,7 +323,7 @@ create table user
   last_name varchar(255) not null,
   type int not null,
   is_deleted bit default b'0' not null,
-  DateAdded timestamp default CURRENT_TIMESTAMP not null
+  meta text null
 )
   engine=InnoDB collate=utf8_bin
 ;
