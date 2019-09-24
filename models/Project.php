@@ -125,7 +125,7 @@ class Project extends AppActiveRecord
      */
     public function getEmployee()
     {
-        return $this->hasOne(Category::className(), ['id' => 'employee_id']);
+        return $this->hasOne(Employee::className(), ['id' => 'employee_id']);
     }
 
     /**
