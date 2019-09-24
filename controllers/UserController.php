@@ -36,7 +36,6 @@ class UserController extends \yii\web\Controller
     public function actionIndex()
     {
         $provider = new UserDataProvider();
-        $provider->search(\Yii::$app->request->get('User', []));
         return $this->render('index', ['provider' => $provider]);
     }
 
@@ -99,7 +98,9 @@ class UserController extends \yii\web\Controller
     public function actionDropbox()
     {
         $dropbox = \Yii::$app->request->post('dropbox');
-        MetaModel::save(User::get(), 'dropbox', $dropbox);
+        $file = fopen('../config/dropbox.json', 'w');
+
+        fclose($file);
         return $this->redirect(['user/settings']);
     }
 

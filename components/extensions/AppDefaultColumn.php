@@ -38,7 +38,7 @@ class AppDefaultColumn
             'filterType' => GridView::FILTER_DATE,
             'filterWidgetOptions' => [
                 'pluginOptions' => [
-                    'format' => 'y-M-d',
+                    'format' => 'yyyy-mm-dd',
                     'autoclose' => true,
                     'todayHighlight' => true,
                 ]

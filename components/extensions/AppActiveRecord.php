@@ -19,7 +19,7 @@ class AppActiveRecord extends ActiveRecord
     public function beforeValidate()
     {
         foreach ($this->toArray() as $key => $value) {
-            if (strpos($key, 'date') !== false) {
+            if (strpos($key, 'date') !== -1) {
                 if ($date = Tools::date($value)) {
                     $this->setAttribute($key, $date->format('Y-m-d'));
                 }

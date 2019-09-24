@@ -101,7 +101,7 @@ class SiteController extends Controller
     public function actionDropbox($path)
     {
         try {
-            $link = Yii::$app->fs->link('/pjt/project/1/screenshot (3).png');
+            $link = Yii::$app->fs->link($path);
             $this->redirect($link);
         } catch (\Exception $e) {
             throw new HttpException(404, 'Invalid Dropbox Url');
