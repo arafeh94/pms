@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
@@ -29,8 +30,9 @@ use Yii;
  *
  * @property Brand $brand
  * @property Project $project
+ * @property string $sup_ref [varchar(255)]
  */
-class InvoiceItem extends \yii\db\ActiveRecord
+class InvoiceItem extends AppActiveRecord
 {
     /**
      * @inheritdoc
@@ -48,7 +50,7 @@ class InvoiceItem extends \yii\db\ActiveRecord
         return [
             [['project_id', 'brand_id', 'is_deleted', 'pft'], 'integer'],
             [['quantity', 'price', 'price_ttl', 'fob_cost', 'fob_ttl', 'orc_cost', 'orc_ttl'], 'number'],
-            [['code', 'old_code', 'description', 'orc_ref', 'se_ref', 'order_status', 'currency'], 'string', 'max' => 255],
+            [['code', 'old_code', 'description', 'orc_ref', 'se_ref', 'order_status', 'currency', 'sup_ref'], 'string', 'max' => 255],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
         ];
@@ -70,6 +72,7 @@ class InvoiceItem extends \yii\db\ActiveRecord
             'price' => Yii::t('app', 'Price'),
             'price_ttl' => Yii::t('app', 'Total Price'),
             'se_ref' => Yii::t('app', 'SE Reference'),
+            'sup_ref' => Yii::t('app', 'Supplier Reference'),
             'order_status' => Yii::t('app', 'Order Status'),
             'fob_cost' => Yii::t('app', 'FOB Cost'),
             'fob_ttl' => Yii::t('app', 'FOB Total'),
@@ -78,7 +81,7 @@ class InvoiceItem extends \yii\db\ActiveRecord
             'orc_ref' => Yii::t('app', 'ORC Reference'),
             'orc_cost' => Yii::t('app', 'ORC Cost'),
             'orc_ttl' => Yii::t('app', 'ORC Total'),
-            'pft' => Yii::t('app', 'PFT'),
+            'pft' => Yii::t('app', 'Profit'),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use app\components\Tools;
 use Yii;
 
@@ -24,7 +25,7 @@ use Yii;
  *
  * @property Project $project
  */
-class ProjectPayment extends \yii\db\ActiveRecord
+class ProjectPayment extends AppActiveRecord
 {
     /**
      * @inheritdoc
@@ -37,7 +38,9 @@ class ProjectPayment extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if ($insert) {
-            $this->inv_ref = 'ISD' . '-' . date('y') . '-' . $this->project->id . '-' . ProjectPayment::find()->project($this->project->id)->count();
+            $sequence = ProjectPayment::find()->project($this->project->id)->count() + 1;
+            $sequence = sprintf("%02d", $sequence);
+            $this->inv_ref = 'ISD' . '-' . date('y') . '-' . $this->project->id . '-' . $sequence;
         }
 
         return parent::beforeSave($insert);
@@ -66,7 +69,7 @@ class ProjectPayment extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'project_id' => Yii::t('app', 'Project'),
-            'method' => Yii::t('app', 'Method'),
+            'method' => Yii::t('app', 'Payment Method'),
             'amount' => Yii::t('app', 'Amount'),
             'date_payment' => Yii::t('app', 'Date Payment'),
             'crv_ref' => Yii::t('app', 'CRV Ref'),

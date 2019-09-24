@@ -3,7 +3,9 @@
 
 /* @var $provider \app\components\extensions\AppDataProvider */
 
+
 use app\components\ModalForm;
+
 
 echo ModalForm::widget([
     'formPath' => '@app/views/project/_form',

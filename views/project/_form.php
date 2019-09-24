@@ -14,7 +14,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
+use \kartik\date\DatePicker;
 
 if (!isset($model)) $model = new Project();
 ?>
@@ -29,7 +29,7 @@ if (!isset($model)) $model = new Project();
 <?php $form = ActiveForm::begin([
     'id' => 'model-form',
     'action' => ['project/update'],
-    'options' => ['data-pjax' => '']
+    'options' => ['data-pjax' => '', 'enctype' => 'multipart/form-data'],
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
@@ -64,9 +64,11 @@ if (!isset($model)) $model = new Project();
 <?= $form->field($model, 'order_value')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'terms')->textInput() ?>
 <?= $form->field($model, 'status')->textInput() ?>
-<?= $form->field($model, 'date_begin')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
-<?= $form->field($model, 'date_end')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+<?= $form->field($model, 'date_begin')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
+<?= $form->field($model, 'etc')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
+<?= $form->field($model, 'date_end')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'notes')->textInput() ?>
+<?= $form->field(new \app\components\UploadForm(), 'file')->label('Attachment')->fileInput(['class' => 'form-control']) ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>

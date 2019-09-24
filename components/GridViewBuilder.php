@@ -29,7 +29,7 @@ class GridViewBuilder
         $config = array_merge([
             'id' => 'gridview',
             'options' => ['class' => 'grid-view', ],
-            'containerOptions' => ['style' => 'overflow-x: hidden;'],
+            'containerOptions' => ['style' => ''],
             'dataProvider' => $provider,
             'columns' => $provider->getColumns(),
             'autoXlFormat' => true,

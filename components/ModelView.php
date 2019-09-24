@@ -37,7 +37,8 @@ class ModelView extends Widget
         }
         return GridView::widget([
             'dataProvider' => new ArrayDataProvider(['allModels' => $model]),
-            'options' => ['class' => 'table'],
+            'options' => ['class' => 'table', 'style' => 'margin-bottom:0'],
+            'tableOptions' => ['style' => 'margin-bottom:0'],
             'showHeader' => false,
             'layout' => "{items}",
         ]);

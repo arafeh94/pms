@@ -1,6 +1,6 @@
 
 <?php
-$app = new DropboxApp("y7974d42350da0o", "znt2xznja84k15k", 'q1yPqhd2J6gAAAAAAAAFdeH7qrNKFgX3KlurfP6BcVOXGULNMSn5cbFYR_SXEI3Q');
+    $app = new DropboxApp("y7974d42350da0o", "znt2xznja84k15k", 'q1yPqhd2J6gAAAAAAAAFdeH7qrNKFgX3KlurfP6BcVOXGULNMSn5cbFYR_SXEI3Q');
 $dropbox = new Dropbox($app);
 $dropbox->getClient()->setHttpClient(new \app\components\DropboxGuzzleClient());
 //$file = $dropbox->upload('robots.txt', "/robots.txt", ['autorename' => true]);

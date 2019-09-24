@@ -1,0 +1,8 @@
+invoice - remark
+invoice - price calculation for total,
+profit - total price-total oracle
+
+
+- sequence add 0 before number
+
+kel shi fi date 7etton DAY-MONTH-YEAR

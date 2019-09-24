@@ -11,14 +11,17 @@ use yii\web\IdentityInterface;
 /**
  * This is the model class for table "user".
  *
- * @property int $id
- * @property string $username
- * @property string $password
- * @property string $name
- * @property int $type
- * @property bool $is_deleted
- * @property string $date_created
- * @property string $date_updated
+ *
+ * @property int $id [int(11)]
+ * @property string $username [varchar(255)]
+ * @property string $password [varchar(255)]
+ * @property string $email [varchar(255)]
+ * @property string $first_name [varchar(255)]
+ * @property string $last_name [varchar(255)]
+ * @property int $type [int(11)]
+ * @property string $is_deleted [bit(1)]
+ * @property int $DateAdded [timestamp]
+ * @property string $meta
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -49,10 +52,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'name', 'type'], 'required'],
+            [['username', 'password', 'first_name', 'last_name', 'type', 'email'], 'required'],
             [['type'], 'integer'],
             [['is_deleted'], 'boolean'],
-            [['date_added', 'date_updated'], 'date'],
             [['username', 'password', 'name'], 'string', 'max' => 255],
             [['username'], 'unique', 'targetAttribute' => ['username'], 'filter' => ['is_deleted' => 0]],
         ];
@@ -108,6 +110,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return false;
+    }
+
+    public function getName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**

@@ -15,7 +15,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
+use \kartik\date\DatePicker;
 
 if (!isset($model)) $model = new Procurement();
 ?>
@@ -57,18 +57,19 @@ if (!isset($model)) $model = new Procurement();
     ],
     'addon' => \app\components\Extensions::select2Add(['brand/index'], 'Add Brand')
 ]); ?>
+
 <?= $form->field($model, 'value')->textInput(['type' => 'number', 'onchange' => 'updateSe(this)']) ?>
 <?= $form->field($model, 'currency')->widget(Select2::className(), ['data' => ['usd', 'eur', 'aed', 'qar', 'gbp', 'omr', 'aud'], 'hideSearch' => true]) ?>
-<?= $form->field($model, 'se')->textInput() ?>
-<?= $form->field($model, 'se_fctr')->textInput(['type' => 'number', 'onchange' => 'updateSe(this)']) ?>
-<?= $form->field($model, 'se_status')->widget(Select2::className(), ['data' => ['CLOSED', 'OPENED'], 'hideSearch' => true]) ?>
-<?= $form->field($model, 'se_cost')->textInput(['type' => 'number']) ?>
-<?= $form->field($model, 'terms')->textInput() ?>
-<?= $form->field($model, 'po_ref')->textInput() ?>
-<?= $form->field($model, 'po_date')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
-<?= $form->field($model, 'inv_ref')->textInput() ?>
-<?= $form->field($model, 'pr')->textInput() ?>
 <?= $form->field($model, 'type')->widget(Select2::className(), ['data' => ["SELLABLE", "I-PROC.", "PC."], 'hideSearch' => true]) ?>
+<?= $form->field($model, 'terms')->textInput() ?>
+<?= $form->field($model, 'se_fctr')->textInput(['type' => 'number', 'onchange' => 'updateSe(this)']) ?>
+<?= $form->field($model, 'se_cost')->textInput(['type' => 'number']) ?>
+<?= $form->field($model, 'pr')->textInput() ?>
+<?= $form->field($model, 'po_ref')->textInput() ?>
+<?= $form->field($model, 'po_date')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
+<?= $form->field($model, 'se')->textInput() ?>
+<?= $form->field($model, 'se_status')->widget(Select2::className(), ['data' => ['CLOSED', 'OPENED'], 'hideSearch' => true]) ?>
+<?= $form->field($model, 'inv_ref')->textInput() ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>

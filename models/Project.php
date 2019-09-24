@@ -2,8 +2,11 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
+use app\components\FileUploadBehavior;
 use app\components\Tools;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "project".
@@ -30,8 +33,9 @@ use Yii;
  * @property Attachment $attachment
  * @property string $terms [varchar(255)]
  * @property int $employee_id [int(11)]
+ * @property string $etc [date]
  */
-class Project extends \yii\db\ActiveRecord
+class Project extends AppActiveRecord
 {
     /**
      * @inheritdoc
@@ -41,6 +45,11 @@ class Project extends \yii\db\ActiveRecord
         return 'project';
     }
 
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [FileUploadBehavior::className()]);
+    }
+
     /**
      * @inheritdoc
      */
@@ -48,7 +57,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'employee_id', 'category_id', 'priority', 'status', 'attachment_id'], 'integer'],
-            [['date_begin', 'date_end'], 'safe'],
+            [['date_begin', 'date_end', 'etc'], 'safe'],
             [['order_value'], 'number'],
             [['notes', 'meta', 'name', 'terms', 'po_number'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
@@ -56,7 +65,8 @@ class Project extends \yii\db\ActiveRecord
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['attachment_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attachment::className(), 'targetAttribute' => ['attachment_id' => 'id']],
             [['is_deleted'], 'safe'],
-            [['customer_id', 'employee_id', 'category_id'], 'required'],
+            [['po_number',], 'unique', 'message' => 'Already Exists'],
+            [['name',], 'unique', 'message' => 'Already Exists'],
         ];
     }
 
@@ -71,11 +81,12 @@ class Project extends \yii\db\ActiveRecord
             'category_id' => Yii::t('app', 'Category'),
             'employee_id' => Yii::t('app', 'Employee'),
             'name' => Yii::t('app', 'Name'),
+            'etc' => Yii::t('app', 'ETC'),
             'priority' => Yii::t('app', 'Priority'),
             'terms' => Yii::t('app', 'Terms'),
             'status' => Yii::t('app', 'Status'),
-            'date_begin' => Yii::t('app', 'Date Begin'),
-            'date_end' => Yii::t('app', 'Date End'),
+            'date_begin' => Yii::t('app', 'Starting Date'),
+            'date_end' => Yii::t('app', 'Closing Date'),
             'order_value' => Yii::t('app', 'Order Value'),
             'po_number' => Yii::t('app', 'Po Number'),
             'notes' => Yii::t('app', 'Notes'),

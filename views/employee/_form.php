@@ -15,7 +15,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
+use \kartik\date\DatePicker;
 
 if (!isset($model)) $model = new Employee();
 ?>

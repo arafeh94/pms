@@ -3,7 +3,7 @@
 return [
     'hostUrl' => 'http://localhost/usp/web',
     'timezone' => 'Asia/Beirut',
-    'dateFormat' => 'yyyy-mm-dd',
+    'dateFormat' => 'd-m-Y',
     'timeFormat' => 'h:i:s',
     'dateTimeFormat' => 'y-m-d h:i:s',
     'titlesSelector' => ['Mr' => 'Mr', 'Dr' => 'Dr', 'Mrs' => 'Mrs', 'Ms' => 'Ms'],

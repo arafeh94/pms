@@ -43,7 +43,6 @@ abstract class AppDataProvider extends ActiveDataProvider
      */
     abstract function columns();
 
-
     public function getColumns()
     {
         if ($this->columns == null) {
@@ -55,17 +54,21 @@ abstract class AppDataProvider extends ActiveDataProvider
 
             $callback = 'app\components\extensions\AppDataProvider::autoIncludes';
             $this->columns = array_map($callback, $this->columns);
-
         }
 
         return $this->columns;
     }
+
 
     private function initColumns()
     {
         $this->columns = $this->columns();
 
         $this->columns = array_map(function ($column) {
+            if (!is_array($column)) {
+                $column = ['attribute' => $column];
+            }
+
             if (!isset($column['vAlign'])) {
                 $column['vAlign'] = 'middle';
             }
@@ -86,7 +89,6 @@ abstract class AppDataProvider extends ActiveDataProvider
         return [
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{update} {delete}',
-            'options' => ['style' => 'asd'],
             'buttons' => [
                 'update' => function ($key, $model, $index) {
                     $url = Url::to([\Yii::$app->controller->id . "/view", 'id' => $model->id]);

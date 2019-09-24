@@ -75,7 +75,7 @@ class ReleaseController extends Controller
         $invoices = [];
         $project = false;
         $model = new Search(['project_id', 'recovery']);
-        $model->addRule(['project_id'], 'required');
+        $model->addRule(['project_id', 'recovery'], 'required');
         $model->addRule(['recovery'], 'number');
         $inv_ref = "Select Project First";
 
@@ -89,6 +89,10 @@ class ReleaseController extends Controller
         if ($project) {
             $lastPayment = ProjectPayment::find()->project($project->id)->orderBy(['id' => SORT_DESC])->limit(1)->one();
             $inv_ref = $lastPayment ? $lastPayment->inv_ref : $inv_ref;
+        }
+
+        if (!$model->getAttributes(['recovery'])['recovery']) {
+            $model->setAttributes(['recovery' => 100]);
         }
 
         Cached::put('print-invoice-recovery', $model->toArray()['recovery']);
@@ -106,6 +110,11 @@ class ReleaseController extends Controller
         $invoices = Cached::get('print-invoice-data', []);
         $project = Cached::get('print-project', null);
         $inv_ref = Cached::get('print-invoice-ref', null);
+        $selection = Yii::$app->request->post('selection');
+        $selection = $selection ? $selection : [];
+        $invoices = array_filter($invoices, function ($invoice) use ($selection) {
+            return in_array($invoice->id, $selection);
+        });
         if ($project == null) {
             throw new BadRequestHttpException('Project is missing, you have to select a project first');
         } else {

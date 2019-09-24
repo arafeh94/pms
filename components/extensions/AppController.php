@@ -7,6 +7,7 @@ use app\components\Tools;
 use app\models\Project;
 use app\models\ProjectPayment;
 use kartik\grid\EditableColumnAction;
+use yii\base\Event;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -91,7 +92,9 @@ abstract class AppController extends \yii\web\Controller
         $saved = null;
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $this->trigger('onBeforeSave', new Event(['name' => 'rami', 'data' => $model]));
             $saved = $model->save();
+            $this->trigger('onAfterSave', new Event(['data' => ['model' => $model]]));
         }
         if (\Yii::$app->request->isAjax) {
             return $this->renderAjax('_form', ['model' => $model, 'saved' => $saved]);
@@ -133,4 +136,6 @@ abstract class AppController extends \yii\web\Controller
         $detail = $class::find()->id($id)->one();
         return $detail;
     }
+
+
 }

@@ -9,28 +9,14 @@
 namespace app\models\providers;
 
 
+use app\components\DropboxButton;
 use app\components\extensions\AppDataProvider;
-use app\components\GridConfig;
-use app\components\Tools;
-use app\models\Category;
-use app\models\Course;
-use app\models\Department;
-use app\models\Major;
 use app\models\Project;
-use app\models\search\CourseSearchModel;
-use app\models\search\DepartmentSearchModel;
-use app\models\search\MajorSearchModel;
-use kartik\grid\BooleanColumn;
-use kartik\grid\DataColumn;
-use kartik\grid\GridView;
-use phpDocumentor\Reflection\Types\Boolean;
-use yii\bootstrap\Html;
-use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 class ProjectDataProvider extends AppDataProvider
 {
+    public $expandable = true;
+
     public function query()
     {
         $this->query = Project::find()
@@ -42,12 +28,15 @@ class ProjectDataProvider extends AppDataProvider
     public function columns()
     {
         return [
-            ['attribute' => 'po_number',],
             ['attribute' => 'name'],
             ['attribute' => 'customer.name', 'label' => 'Customer',],
             ['attribute' => 'category.name', 'label' => 'Category'],
-            ['attribute' => 'order_value',],
+            ['attribute' => 'status',],
+            ['attribute' => 'employee.name', 'label' => 'Employee'],
+            ['attribute' => 'date_begin', 'as' => ['date']],
             ['attribute' => 'date_end', 'as' => ['date']],
+            ['attribute' => 'po_number',],
+            ['class' => DropboxButton::className(),],
         ];
     }
 
@@ -58,7 +47,7 @@ class ProjectDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['po_number', 'name', 'order_value', 'customer.name', 'category.name', 'date_begin', 'date_end'];
+        return ['po_number', 'name' => 'project.name', 'order_value', 'customer.name', 'category.name', 'date_begin', 'date_end', 'status', 'employee.name'];
     }
 
 

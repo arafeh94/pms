@@ -10,28 +10,13 @@ namespace app\models\providers;
 
 
 use app\components\extensions\AppDataProvider;
-use app\components\GridConfig;
-use app\components\Tools;
-use app\models\Course;
-use app\models\Customer;
-use app\models\Department;
-use app\models\Major;
 use app\models\Procurement;
-use app\models\Project;
-use app\models\search\CourseSearchModel;
-use app\models\search\DepartmentSearchModel;
-use app\models\search\MajorSearchModel;
-use kartik\grid\BooleanColumn;
-use kartik\grid\DataColumn;
-use kartik\grid\GridView;
-use phpDocumentor\Reflection\Types\Boolean;
 use yii\bootstrap\Html;
-use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 class ProcurementDataProvider extends AppDataProvider
 {
+    public $expandable = true;
 
     /**
      * @return void
@@ -50,14 +35,14 @@ class ProcurementDataProvider extends AppDataProvider
     function columns()
     {
         return [
-            ['attribute' => 'project.po_number'],
+            ['attribute' => 'project.name', 'label' => 'Project'],
             ['attribute' => 'supplier.name', 'label' => 'Supplier'],
             ['attribute' => 'brand.name', 'label' => 'Brand'],
-            ['attribute' => 'value'],
+            ['attribute' => 'type'],
             ['attribute' => 'pr'],
             ['attribute' => 'po_ref'],
-            ['attribute' => 'po_date', 'as' => 'date'],
-
+            ['attribute' => 'se'],
+            ['attribute' => 'se_status'],
         ];
     }
 
@@ -83,6 +68,6 @@ class ProcurementDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['project.po_number', 'supplier.name', 'brand.name', 'value', 'pr', 'po_ref', 'po_date'];
+        return ['project.name', 'supplier.name', 'brand.name', 'value', 'currency', 'type', 'terms', 'se_fctr', 'se_cost', 'pr', 'po_ref', 'po_date', 'se', 'se_status', 'inv_ref',];
     }
 }

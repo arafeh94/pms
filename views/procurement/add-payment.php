@@ -8,7 +8,7 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-use yii\jui\DatePicker;
+use \kartik\date\DatePicker;
 
 
 /** @var $model \app\models\ProcurementPayment */
@@ -24,7 +24,7 @@ use yii\jui\DatePicker;
 ]) ?>
 <?= $form->field($model, 'procurement_id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'amount')->textInput() ?>
-<?= $form->field($model, 'date')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
+<?= $form->field($model, 'date')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 
 <div class="button-container">
     <?= Html::submitButton('submit', ['class' => 'btn btn-success']) ?>

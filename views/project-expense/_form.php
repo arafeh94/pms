@@ -17,7 +17,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
+use \kartik\date\DatePicker;
 
 if (!isset($model)) $model = new ProjectExpense();
 ?>
@@ -54,8 +54,8 @@ if (!isset($model)) $model = new ProjectExpense();
 ]); ?>
 <?= $form->field($model, 'order_ref')->textInput() ?>
 <?= $form->field($model, 'order_amount')->textInput() ?>
+<?= $form->field($model, 'date_expense')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'remark')->textInput() ?>
-<?= $form->field($model, 'date_expense')->widget(DatePicker::className(), ['dateFormat' => 'y-M-d', 'options' => ['class' => 'form-control', 'autocomplete' => 'off']]) ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>

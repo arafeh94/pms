@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
@@ -20,7 +21,7 @@ use Yii;
  * @property Project $project
  * @property Employee $employee
  */
-class ProjectExpense extends \yii\db\ActiveRecord
+class ProjectExpense extends AppActiveRecord
 {
     /**
      * @inheritdoc

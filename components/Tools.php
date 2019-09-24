@@ -49,6 +49,23 @@ class Tools extends Component
         return Yii::$app->createController($controller . $action) != false;
     }
 
+    /**
+     * @param $value
+     * @return bool|\DateTime
+     */
+    static function date($value)
+    {
+        if (!$value) {
+            return false;
+        }
+
+        try {
+            return new \DateTime($value);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
     public static function random($length = 8)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -106,12 +123,22 @@ class Tools extends Component
         return array_pop($args);
     }
 
+    /**
+     * @param string $haystack The string to search in
+     * @param mixed $needle
+     * @return boolean
+     */
     static function str_starts_with($haystack, $needle)
     {
         $length = strlen($needle);
         return (substr($haystack, 0, $length) === $needle);
     }
 
+    /**
+     * @param string $haystack The string to search in
+     * @param mixed $needle
+     * @return boolean
+     */
     static function str_ends_with($haystack, $needle)
     {
         $length = strlen($needle);

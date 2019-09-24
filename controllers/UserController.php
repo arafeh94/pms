@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\ConsoleRunner;
+use app\components\extensions\MetaModel;
 use app\components\Shell;
 use app\components\Tools;
 use app\models\providers\UserDataProvider;
@@ -52,8 +53,7 @@ class UserController extends \yii\web\Controller
         if (\Yii::$app->request->isAjax) {
             $id = \Yii::$app->request->post('User')['UserId'];
             $model = $id === "" ? new User() : User::find()->active()->id($id)->one();
-            if ($model->isNewRecord) $model->Password = 'default';
-            if ($model->isNewRecord) $model->CreatedByUserId = User::get()->UserId;
+            if ($model->isNewRecord) $model->password = 'default';
             $saved = null;
             if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
                 $saved = $model->save();
@@ -67,7 +67,7 @@ class UserController extends \yii\web\Controller
     {
         if (\Yii::$app->request->isAjax) {
             $user = User::findOne($id);
-            $user->IsDeleted = 1;
+            $user->is_deleted = 1;
             return $user->save();
         }
         return false;
@@ -94,7 +94,13 @@ class UserController extends \yii\web\Controller
         $composer = exec('php ../composer.phar install');
         $database = exec('php ../yii migrate');
         return $this->render('update', ['git' => $git, 'composer' => $composer, 'database' => $database]);
+    }
 
+    public function actionDropbox()
+    {
+        $dropbox = \Yii::$app->request->post('dropbox');
+        MetaModel::save(User::get(), 'dropbox', $dropbox);
+        return $this->redirect(['user/settings']);
     }
 
 }

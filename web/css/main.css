@@ -9,8 +9,22 @@
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+.table .table {
+    background: transparent;
+}
+
 .grid-view td {
     white-space: nowrap;
+}
+
+.container {
+    width: 90%;
 }
 
 html,

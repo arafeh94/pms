@@ -21,7 +21,7 @@ use yii\helpers\Html;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'form', 'method' => 'get']) ?>
-<?= $form->field($model, 'recovery')->label('Payable %')->textInput(['type' => 'number', 'onchange' => '$("#form").submit()', 'value' => '100']) ?>
+<?= $form->field($model, 'recovery')->label('Payable %')->textInput(['type' => 'number', 'onchange' => '$("#form").submit()']) ?>
 
 <?= $form->field($model, 'project_id')->label('Select Project')->widget(Select2::classname(), [
     'data' => ArrayHelper::map(\app\models\Project::find()->active()->all(), 'id', 'po_number'),
@@ -32,13 +32,25 @@ use yii\helpers\Html;
 ]); ?>
 
 <?php ActiveForm::end(); ?>
+
+<?php $form = ActiveForm::begin(['id' => 'print-form', 'method' => 'post', 'action' => ['release/print-invoice'], 'options' => ['target' => '_blank']]) ?>
 <?= \kartik\grid\GridView::widget([
     'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $invoices]),
-    'columns' => ['description', 'brand.name', 'quantity', 'price'],
+    'columns' => [
+        'description', 'brand.name', 'quantity', 'price',
+        ['class' => 'yii\grid\CheckboxColumn', 'checkboxOptions' => function ($model) {
+            return ['value' => $model->id];
+        },]
+    ],
 ]) ?>
-
-
 <div style="width: 100%;text-align: right; margin-top: 12px">
-    <span class="text-info center-block" style="text-align: left;font-size: 11pt">Print With Invoice Reference: <b><?= $inv_ref ?></b></span>
-    <?= \yii\bootstrap\Html::a('Print', ['release/print-invoice'], ['class' => 'btn btn-danger', 'target' => "_blank", 'onclick' => 'return $("#search-project_id").val() !== ""']) ?>
+    <span class="text-info center-block"
+          style="text-align: left;font-size: 11pt">Print With Invoice Reference: <b><?= $inv_ref ?></b></span>
+    <?= \yii\bootstrap\Html::submitButton('Print', ['class' => 'btn btn-danger', 'target' => "_blank"]) ?>
 </div>
+<?php ActiveForm::end(); ?>
+<script>
+    window.addEventListener('load', function () {
+        $("[type=checkbox]").prop('checked', true);
+    })
+</script>

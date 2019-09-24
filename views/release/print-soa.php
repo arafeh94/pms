@@ -85,7 +85,7 @@
         <span style="width: 100%;text-align: right;position: absolute;right: 24px;font-size: 18px;align-content: center;line-height: 10px;">
                 <?= \app\components\Tools::currentDate() ?>
         </span>
-        <h2>Order Logs </h2>
+        <h2>Statement Of Account</h2>
         <div style="margin: 18px 72px">
             <h4>Darwish Technology</h4>
             <h6><i>Branch of Modern Home - Member of Darwish Holding</i></h6>
@@ -183,3 +183,9 @@
     </div>
 </div>
 
+
+<script>
+    window.addEventListener('load', function () {
+        window.print();
+    });
+</script>

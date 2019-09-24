@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
@@ -30,7 +31,7 @@ use Yii;
  * @property Supplier $supplier
  * @property ProcurementPayment[] $procurementPayments
  */
-class Procurement extends \yii\db\ActiveRecord
+class Procurement extends AppActiveRecord
 {
     /**
      * @inheritdoc

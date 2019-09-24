@@ -11,6 +11,7 @@ use Yii;
  * @property string $table_ref
  * @property string $field_name
  * @property string $field_type
+ * @property int $is_deleted [int(11)]
  */
 class Meta extends \yii\db\ActiveRecord
 {

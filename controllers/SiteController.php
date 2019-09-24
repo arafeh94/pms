@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\AppController;
+use app\components\DropboxShell;
 use app\components\Tools;
 use app\models\Course;
 use app\models\forms\LoginForm;
@@ -18,6 +19,7 @@ use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 
@@ -93,6 +95,16 @@ class SiteController extends Controller
                 }
             }
             return $this->render('login', ['model' => $model]);
+        }
+    }
+
+    public function actionDropbox($path)
+    {
+        try {
+            $link = Yii::$app->fs->link('/pjt/project/1/screenshot (3).png');
+            $this->redirect($link);
+        } catch (\Exception $e) {
+            throw new HttpException(404, 'Invalid Dropbox Url');
         }
     }
 

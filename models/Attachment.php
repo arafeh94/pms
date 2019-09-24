@@ -2,20 +2,19 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
  * This is the model class for table "attachment".
  *
  * @property int $id
- * @property string $url
- * @property string $description
- * @property string $hash
+ * @property string $path
  *
  * @property Project[] $projects
  * @property int $is_deleted [int(11)]
  */
-class Attachment extends \yii\db\ActiveRecord
+class Attachment extends AppActiveRecord
 {
     /**
      * @inheritdoc
@@ -31,7 +30,7 @@ class Attachment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'description', 'hash'], 'string', 'max' => 255],
+            [['path',], 'string', 'max' => 255],
             [['is_deleted'], 'safe']
         ];
     }
@@ -43,9 +42,7 @@ class Attachment extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'url' => Yii::t('app', 'Url'),
-            'description' => Yii::t('app', 'Description'),
-            'hash' => Yii::t('app', 'Hash'),
+            'path' => Yii::t('app', 'Path'),
         ];
     }
 

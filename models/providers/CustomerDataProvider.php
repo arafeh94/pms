@@ -10,33 +10,19 @@ namespace app\models\providers;
 
 
 use app\components\extensions\AppDataProvider;
-use app\components\GridConfig;
-use app\components\Tools;
-use app\models\Course;
 use app\models\Customer;
-use app\models\Department;
-use app\models\Major;
-use app\models\Project;
-use app\models\search\CourseSearchModel;
-use app\models\search\DepartmentSearchModel;
-use app\models\search\MajorSearchModel;
-use kartik\grid\BooleanColumn;
-use kartik\grid\DataColumn;
-use phpDocumentor\Reflection\Types\Boolean;
-use yii\bootstrap\Html;
-use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 class CustomerDataProvider extends AppDataProvider
 {
+
+    public $expandable = true;
 
     /**
      * @return void
      */
     function query()
     {
-        $this->query = Customer::find();
+        $this->query = Customer::find()->innerJoinWith('company');
     }
 
     /**
@@ -44,7 +30,7 @@ class CustomerDataProvider extends AppDataProvider
      */
     function columns()
     {
-        return ['name', 'phone', 'email'];
+        return ['name', ['attribute' => 'company.name', 'label' => 'Company'], 'phone', 'email',];
     }
 
     /**
@@ -53,6 +39,6 @@ class CustomerDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['name', 'phone', 'email'];
+        return ['name', 'company.name', 'phone', 'email',];
     }
 }

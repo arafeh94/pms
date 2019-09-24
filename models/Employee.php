@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
@@ -15,7 +16,7 @@ use Yii;
  * @property int $attachment_id
  * @property int $is_deleted
  */
-class Employee extends \yii\db\ActiveRecord
+class Employee extends AppActiveRecord
 {
     /**
      * @inheritdoc

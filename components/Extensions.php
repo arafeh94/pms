@@ -11,6 +11,7 @@ namespace app\components;
 
 use Yii;
 use yii\bootstrap\Html;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class Extensions extends Controller
@@ -26,6 +27,15 @@ class Extensions extends Controller
                 ]),
                 'asButton' => true
             ]
+        ];
+    }
+
+    public static function picker()
+    {
+        $format = ArrayHelper::getValue(\Yii::$app->params, 'dateFormat', 'Y-m-d');
+        return [
+            'pluginOptions' => ['format' => 'd-m-yyyy', 'autoclose' => true,],
+            'options' => ['class' => 'form-control', 'autocomplete' => 'off']
         ];
     }
 

@@ -10,27 +10,7 @@ namespace app\models\providers;
 
 
 use app\components\extensions\AppDataProvider;
-use app\components\GridConfig;
-use app\components\Tools;
-use app\models\Course;
-use app\models\Customer;
-use app\models\Department;
-use app\models\Major;
-use app\models\Procurement;
-use app\models\Project;
 use app\models\ProjectExpense;
-use app\models\search\CourseSearchModel;
-use app\models\search\DepartmentSearchModel;
-use app\models\search\MajorSearchModel;
-use app\models\Supplier;
-use kartik\grid\BooleanColumn;
-use kartik\grid\DataColumn;
-use kartik\grid\GridView;
-use phpDocumentor\Reflection\Types\Boolean;
-use yii\bootstrap\Html;
-use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 class ProjectExpenseDataProvider extends AppDataProvider
 {
@@ -51,7 +31,6 @@ class ProjectExpenseDataProvider extends AppDataProvider
     function columns()
     {
         return [
-            ['attribute' => 'project.po_number'],
             ['attribute' => 'project.name', 'label' => 'Project', ],
             ['attribute' => 'employee.name', 'label' => 'Employee'],
             ['attribute' => 'order_ref',],

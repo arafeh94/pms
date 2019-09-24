@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\extensions\AppActiveRecord;
 use Yii;
 
 /**
@@ -13,7 +14,7 @@ use Yii;
  * @property Project[] $projects
  * @property int $is_deleted [int(11)]
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends AppActiveRecord
 {
     /**
      * @inheritdoc
