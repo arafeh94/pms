@@ -67,7 +67,7 @@ class Project extends AppActiveRecord
             [['is_deleted'], 'safe'],
             [['po_number',], 'unique', 'message' => 'Already Exists'],
             [['name',], 'unique', 'message' => 'Already Exists'],
-            [['brand_id', 'customer_id', 'category_id'], 'required'],
+            [['employee_id', 'customer_id', 'category_id'], 'required'],
         ];
     }
 
