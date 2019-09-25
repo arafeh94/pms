@@ -5,7 +5,7 @@ TRUNCATE TABLE category;
 TRUNCATE TABLE company;
 TRUNCATE TABLE customer;
 TRUNCATE TABLE employee;
-TRUNCATE TABLE invoice;
+TRUNCATE TABLE invoice_item-item;
 TRUNCATE TABLE meta;
 TRUNCATE TABLE procurement;
 TRUNCATE TABLE procurement_payment;

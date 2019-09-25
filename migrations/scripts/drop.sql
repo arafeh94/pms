@@ -5,7 +5,7 @@ drop TABLE category;
 drop TABLE company;
 drop TABLE customer;
 drop TABLE employee;
-drop TABLE invoice;
+drop TABLE invoice_item;
 drop TABLE meta;
 drop TABLE procurement;
 drop TABLE procurement_payment;
