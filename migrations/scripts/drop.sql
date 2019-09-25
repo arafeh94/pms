@@ -1,0 +1,17 @@
+set foreign_key_checks = 0;
+drop TABLE erp.attachment;
+drop TABLE erp.brand;
+drop TABLE erp.category;
+drop TABLE erp.company;
+drop TABLE erp.customer;
+drop TABLE erp.employee;
+drop TABLE erp.invoice;
+drop TABLE erp.meta;
+drop TABLE erp.procurement;
+drop TABLE erp.procurement_payment;
+drop TABLE erp.project;
+drop TABLE erp.project_expense;
+drop TABLE erp.project_payment;
+drop TABLE erp.supplier;
+drop TABLE erp.user;
+set foreign_key_checks = 1;

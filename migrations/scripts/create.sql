@@ -1,10 +1,12 @@
--- db name erp
+-- we don't know how to generate schema erp (class Schema) :(
 create table attachment
 (
   id int auto_increment
     primary key,
+  owner varchar(255) null,
   path varchar(255) null,
-  is_deleted int default '0' null
+  is_deleted int default '0' null,
+  owner_id int null
 )
   engine=InnoDB
 ;
