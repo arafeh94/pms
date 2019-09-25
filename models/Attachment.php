@@ -13,6 +13,8 @@ use Yii;
  *
  * @property Project[] $projects
  * @property int $is_deleted [int(11)]
+ * @property string $owner [varchar(255)]
+ * @property int $owner_id [int(11)]
  */
 class Attachment extends AppActiveRecord
 {
@@ -30,8 +32,8 @@ class Attachment extends AppActiveRecord
     public function rules()
     {
         return [
-            [['path',], 'string', 'max' => 255],
-            [['is_deleted'], 'safe']
+            [['path', 'owner'], 'string', 'max' => 255],
+            [['is_deleted', 'owner_id'], 'safe']
         ];
     }
 

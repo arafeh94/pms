@@ -28,12 +28,8 @@ class DropboxButton extends ActionColumn
     {
         $this->buttons = [
             'attachment' => function ($key, $model, $index) {
-                if ($model->attachment) {
-                    $url = Url::to(["site/dropbox", 'path' => $model->attachment->path]);
-                    return Html::a('<span class="glyphicon glyphicon-link pointer"></span>', $url, ['data-pjax' => 0, 'target' => '_blank']);
-                } else {
-                    return "";
-                }
+                $url = Url::to(["attachment/index", 'owner' => $model->tableName(), 'owner_id' => $model->id]);
+                return Html::a('<span class="glyphicon glyphicon-link pointer"></span>', $url, ['data-pjax' => 0, 'target' => '_blank']);
             }
         ];
     }

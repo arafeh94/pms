@@ -30,4 +30,14 @@ class AttachmentQuery extends AppModelQuery
     {
         return parent::one($db);
     }
+
+    /**
+     * @param $owner
+     * @param $owner_id
+     * @return AttachmentQuery
+     */
+    public function of($owner, $owner_id)
+    {
+        return $this->andWhere(['owner' => $owner, 'owner_id' => $owner_id]);
+    }
 }

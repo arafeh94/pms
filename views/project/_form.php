@@ -68,7 +68,6 @@ if (!isset($model)) $model = new Project();
 <?= $form->field($model, 'etc')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'date_end')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'notes')->textInput() ?>
-<?= $form->field(new \app\components\UploadForm(), 'file')->label('Attachment')->fileInput(['class' => 'form-control']) ?>
 
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>

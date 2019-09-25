@@ -19,8 +19,15 @@
     background: transparent;
 }
 
-.grid-view td {
-    white-space: nowrap;
+@media only screen and (min-width: 768px) {
+    .grid-view table {
+        table-layout: fixed;
+    }
+}
+
+.grid-view th, td {
+    border: 5px solid #BCBCBC;
+    word-wrap: break-word;
 }
 
 .container {
@@ -271,6 +278,7 @@ thead th {
 .card {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    padding: 8px;
 }
 
 .chover:hover {

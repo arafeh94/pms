@@ -39,8 +39,9 @@ class DropboxShell extends Component
             $name = strtolower($name);
         }
 
-        $path = strtolower(\Yii::getAlias($path));
-        return $this->dropbox->upload($path, $this->path . $this->folder . $name, ['autorename' => true]);
+        $pathOnDrive = strtolower(\Yii::getAlias($path));
+        $pathOnDropbox = $this->path . $this->folder . $name;
+        return $this->dropbox->upload($pathOnDrive, $pathOnDropbox, ['autorename' => true]);
     }
 
     public function link($path)

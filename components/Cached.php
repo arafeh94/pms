@@ -28,7 +28,22 @@ class Cached extends Component
     public static function get($key, $def)
     {
         $val = \Yii::$app->cache->get($key);
-        return $val == false ? $def : $val;
+        return $val === false ? $def : $val;
+    }
+
+    public static function monopoly($key, $def)
+    {
+        if (\Yii::$app->cache->exists($key)) {
+            $val = \Yii::$app->cache->get($key);
+            self::remove($key);
+            return $val;
+        }
+        return $def;
+    }
+
+    public static function remove($key)
+    {
+        return \Yii::$app->cache->delete($key);
     }
 
 }
