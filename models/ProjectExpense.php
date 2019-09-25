@@ -44,6 +44,7 @@ class ProjectExpense extends AppActiveRecord
             [['order_ref',], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
+            [['project_id','employee_id'], 'required'],
         ];
     }
 

@@ -53,6 +53,7 @@ class InvoiceItem extends AppActiveRecord
             [['code', 'old_code', 'description', 'orc_ref', 'se_ref', 'order_status', 'currency', 'sup_ref'], 'string', 'max' => 255],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [['project_id', 'brand_id',], 'required'],
         ];
     }
 

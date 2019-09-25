@@ -45,6 +45,7 @@ class Customer extends AppActiveRecord
             [['meta'], 'string'],
             [['name', 'email', 'phone', 'country', 'zip', 'state', 'city', 'address'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id',], 'required'],
         ];
     }
 

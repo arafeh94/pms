@@ -58,6 +58,7 @@ class ProjectPayment extends AppActiveRecord
             [['meta'], 'string'],
             [['method', 'crv_ref', 'inv_ref'], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [['project_id',], 'required'],
         ];
     }
 
