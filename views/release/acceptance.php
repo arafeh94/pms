@@ -20,7 +20,7 @@ use yii\helpers\Html;
 
 <?php $form = ActiveForm::begin(['id' => 'form', 'method' => 'get']) ?>
 <?= $form->field($model, 'project_id')->label('Select Project')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Project::find()->active()->all(), 'id', 'po_number'),
+    'data' => ArrayHelper::map(\app\models\Project::find()->active()->open()->all(), 'id', 'name'),
     'options' => ['placeholder' => '', 'onchange' => '$("#form").submit()'],
     'pluginOptions' => [
         'allowClear' => true

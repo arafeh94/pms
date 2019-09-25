@@ -29,6 +29,7 @@ class ProjectDataProvider extends AppDataProvider
     public function columns()
     {
         return [
+            ['attribute' => 'id'],
             ['attribute' => 'name'],
             ['attribute' => 'customer.name', 'label' => 'Customer',],
             ['attribute' => 'category.name', 'label' => 'Category'],
@@ -48,7 +49,7 @@ class ProjectDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['po_number', 'name' => 'project.name', 'order_value', 'customer.name', 'category.name', 'date_begin', 'date_end', 'status', 'employee.name'];
+        return ['id' => 'project.id', 'po_number', 'name' => 'project.name', 'order_value', 'customer.name', 'category.name', 'date_begin', 'date_end', 'status', 'employee.name'];
     }
 
 

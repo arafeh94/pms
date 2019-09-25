@@ -33,7 +33,7 @@ if (!isset($model)) $model = new InvoiceItem();
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'project_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Project::find()->active()->all(), 'id', 'po_number'),
+    'data' => ArrayHelper::map(\app\models\Project::find()->active()->open()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true

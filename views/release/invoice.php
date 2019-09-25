@@ -24,7 +24,7 @@ use yii\helpers\Html;
 <?= $form->field($model, 'recovery')->label('Payable %')->textInput(['type' => 'number', 'onchange' => '$("#form").submit()']) ?>
 
 <?= $form->field($model, 'project_id')->label('Select Project')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Project::find()->active()->all(), 'id', 'po_number'),
+    'data' => ArrayHelper::map(\app\models\Project::find()->open()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => '', 'onchange' => '$("#form").submit()'],
     'pluginOptions' => [
         'allowClear' => true

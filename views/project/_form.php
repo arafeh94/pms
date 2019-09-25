@@ -63,7 +63,7 @@ if (!isset($model)) $model = new Project();
 <?= $form->field($model, 'po_number')->textInput() ?>
 <?= $form->field($model, 'order_value')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'terms')->textInput() ?>
-<?= $form->field($model, 'status')->textInput() ?>
+<?= $form->field($model, 'status')->widget(Select2::className(), ['data' => ['OPENED', 'CLOSED'], 'hideSearch' => true]) ?>
 <?= $form->field($model, 'date_begin')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'etc')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>
 <?= $form->field($model, 'date_end')->widget(DatePicker::className(), \app\components\Extensions::picker()) ?>

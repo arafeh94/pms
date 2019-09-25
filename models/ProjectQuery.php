@@ -31,5 +31,12 @@ class ProjectQuery extends AppModelQuery
         return parent::one($db);
     }
 
+    /**
+     * @return ProjectQuery
+     */
+    public function open()
+    {
+        return $this->andWhere("po_number != ''");
+    }
 
 }

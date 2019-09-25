@@ -36,7 +36,7 @@ if (!isset($model)) $model = new ProjectExpense();
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'project_id')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(\app\models\Project::find()->all(), 'id', 'po_number'),
+    'data' => ArrayHelper::map(\app\models\Project::find()->open()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true

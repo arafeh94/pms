@@ -30,6 +30,7 @@ class UploadForm extends Model
     {
         $path = '../uploads/' . $this->file->baseName . '.' . $this->file->extension;
         $path = \Yii::getAlias($path);
+        $path = strtolower($path);
         $result = $this->file->saveAs($path, true);
         if ($result) {
             $this->uploaded = $path;
