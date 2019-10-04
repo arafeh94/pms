@@ -76,13 +76,15 @@ if (!isset($model)) $model = new InvoiceItem();
 
 <script>
     function updateCosts(element) {
-        let qts = $('#invoiceitem-quantity').val() || 0;
-        let price = $('#invoiceitem-price').val() || 0;
-        let fob_price = $('#invoiceitem-fob_cost').val() || 0;
-        let orc_price = $('#invoiceitem-orc_cost').val() || 0;
+        debugger;
+        let qts = parseFloat($('#invoiceitem-quantity').val() || 0);
+        let price = parseFloat($('#invoiceitem-price').val() || 0);
+        let fob_price = parseFloat($('#invoiceitem-fob_cost').val() || 0);
+        let orc_price = parseFloat($('#invoiceitem-orc_cost').val() || 0);
         $('#invoiceitem-price_ttl').val(qts * price);
         $('#invoiceitem-fob_ttl').val(qts * fob_price);
         $('#invoiceitem-orc_ttl').val(qts * orc_price);
-        $('#invoiceitem-pft').val((qts * price) - (qts * orc_price));
+        let profit = (qts * price) - (qts * orc_price);
+        $('#invoiceitem-pft').val(profit);
     }
 </script>
