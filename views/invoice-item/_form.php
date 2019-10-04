@@ -65,7 +65,7 @@ if (!isset($model)) $model = new InvoiceItem();
 <?= $form->field($model, 'se_ref')->textInput() ?>
 <?= $form->field($model, 'orc_cost')->textInput(['type' => 'number', 'onchange' => 'updateCosts(this)']) ?>
 <?= $form->field($model, 'orc_ttl')->textInput(['type' => 'number']) ?>
-<?= $form->field($model, 'pft')->textInput() ?>
+<?= $form->field($model, 'pft')->textInput(['type' => 'number']) ?>
 
 
 <div class="button-container">
@@ -76,10 +76,10 @@ if (!isset($model)) $model = new InvoiceItem();
 
 <script>
     function updateCosts(element) {
-        let qts = $('#invoiceitem-quantity').val();
-        let price = $('#invoiceitem-price').val();
-        let fob_price = $('#invoiceitem-fob_cost').val();
-        let orc_price = $('#invoiceitem-orc_cost').val();
+        let qts = $('#invoiceitem-quantity').val() || 0;
+        let price = $('#invoiceitem-price').val() || 0;
+        let fob_price = $('#invoiceitem-fob_cost').val() || 0;
+        let orc_price = $('#invoiceitem-orc_cost').val() || 0;
         $('#invoiceitem-price_ttl').val(qts * price);
         $('#invoiceitem-fob_ttl').val(qts * fob_price);
         $('#invoiceitem-orc_ttl').val(qts * orc_price);
